@@ -1,2 +1,0 @@
-# notesrepo
-notes project

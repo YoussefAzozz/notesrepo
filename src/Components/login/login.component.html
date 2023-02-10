@@ -1,0 +1,43 @@
+
+<section id="signIn" class="min-vh-100 bg-darkGray">
+    <div class="w-50 py-5 mx-auto position-absolute top-50 start-50 translate-middle">
+       <form (ngSubmit)="submitLogInForm(logInForm)" [formGroup]="logInForm" class="py-5">
+           <div class="email mb-3">
+             <input [class.is-valid]="logInForm.controls.email.status=='VALID'" formControlName="email" type="email" class="form-control" placeholder="Enter Your E-mail" >
+             <div *ngIf="logInForm.get('email')?.errors && logInForm.get('email')?.touched">
+                <p *ngIf="logInForm.get('email')?.getError('email') " class="alert alert-danger py-1">invalid E-mail</p>
+                <p *ngIf="logInForm.get('email')?.getError('required') " class="alert alert-danger py-1"> E-mail is required</p>
+             </div>        
+          </div>
+   
+        <div class="age mb-3">
+           <input [class.is-valid]="logInForm.controls.password.status=='VALID'"  formControlName="password" type="password" class="form-control" placeholder="Enter Your Password" >
+           <div *ngIf="logInForm.get('password')?.errors && logInForm.get('password')?.touched">
+              <ul *ngIf="logInForm.get('password')?.getError('pattern')" class="alert alert-danger list-unstyled ">
+                <li>Password is required</li>
+                 <li>
+                   <ul>
+                       <li>password must contain at least eight characters</li>
+                       <li>at least one number</li>
+                       <li>and both lower and uppercase letters</li>
+                       <li>and special characters</li>
+                     </ul>
+                 </li>
+              </ul>
+              <p *ngIf="logInForm.get('password')?.getError('required') " class="alert alert-danger py-1"> password is required</p>
+           </div>        
+        </div>
+   
+        <div class="submit-btn mb-3">
+           <button type="submit" class="btn-secondary btn w-100">
+               <span *ngIf="!isLoading">Login</span>
+               <span *ngIf="isLoading">Waiting...</span>
+           </button>
+        </div>
+        <div *ngIf="errorMassage">
+           <p class="alert alert-danger py-1">{{errorMassage}}</p>
+        </div>    
+       </form>
+   </div>
+ </section>
+ 
